@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>untuk Rairai 🎀</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+    color: #173b52;
+    background: #d9f1ff;
+    background-image: radial-gradient(#ffffff 1.4px, transparent 1.4px);
+    background-size: 23px 23px;
+}
+
+/* Semua halaman */
+.screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 14px;
+}
+
+.card {
+    width: min(570px, 100%);
+    text-align: center;
+    padding: 32px 19px 28px;
+    background: rgba(255,255,255,0.91);
+    border: 4px solid white;
+    border-radius: 32px;
+    box-shadow:
+        10px 12px 0 #6098b8,
+        0 20px 40px rgba(36,87,115,0.18);
+    position: relative;
+}
+
+/* Pita kecil atas */
+.ribbon {
+    display: inline-block;
+    background: #dff5ff;
+    border: 3px solid #173b52;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 1000;
+    box-shadow: 4px 4px 0 #173b52;
+    letter-spacing: 1px;
+}
+
+/* Emoji pita */
+.bow {
+    font-size: 62px;
+    margin: 20px 0 10px;
+    animation: bob 1.8s ease-in-out infinite;
+}
+
+@keyframes bob {
+    50% {
+        transform: translateY(-8px) rotate(5deg);
+    }
+}
+
+/* Judul */
+h1 {
+    margin: 0;
+    font-size: clamp(46px, 13vw, 76px);
+    line-height: .9;
+    color: #287ea8;
+    text-shadow:
+        4px 4px 0 white,
+        7px 7px 0 #8fcbe6;
+    letter-spacing: 2px;
+}
+
+.teaser {
+    font-size: 17px;
+    font-weight: 900;
+    margin: 18px 0 24px;
+    color: #4b7890;
+}
+
+/* Tombol */
+button {
+    border: 3px solid #173b52;
+    background: #8bd5fa;
+    color: #12354a;
+    padding: 13px 22px;
+    border-radius: 16px;
+    font-size: 17px;
+    font-weight: 1000;
+    box-shadow: 5px 5px 0 #173b52;
+    cursor: pointer;
+}
+
+button:active {
+    transform: translate(4px,4px);
+    box-shadow: 1px 1px 0 #173b52;
+}
+
+/* Input kode */
+input {
+    width: min(220px,80%);
+    padding: 13px 14px;
+    margin: 15px 0;
+
+    border: 3px solid #173b52;
+    border-radius: 14px;
+
+    text-align: center;
+    font-size: 20px;
+    font-weight: 1000;
+    letter-spacing: 4px;
+
+    outline: none;
+    background: #f5fcff;
+    color: #173b52;
+}
+
+input:focus {
+    box-shadow: 0 0 0 4px #b7e5f8;
+}
+
+/* Petunjuk kode */
+.hint {
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.5;
+    color: #37677f;
+}
+
+/* Pesan salah */
+.error {
+    height: 20px;
+    margin-top: 10px;
+    color: #24749b;
+    font-size: 13px;
+    font-weight: 1000;
+}
+
+/* Sembunyikan halaman */
+.hidden {
+    display: none;
+}
+
+/* Animasi halaman */
+.fade {
+    animation: appear .7s ease both;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tulisan sebelum ucapan */
+.bigtext {
+    font-size: 29px;
+    font-weight: 1000;
+    color: #287ea8;
+    margin: 8px 0 23px;
+}
+
+/* Kotak ucapan */
+.note {
+    text-align: left;
+    background: white;
+    border: 3px dashed #438eb4;
+    border-radius: 22px;
+    padding: 20px 17px;
+    box-shadow: 6px 6px 0 #a5d7eb;
+
+    font-size: 16px;
+    line-height: 1.75;
+    font-weight: 800;
+}
+
+.note .title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 1000;
+    color: #1e719a;
+    margin-bottom: 14px;
+}
+
+.note p {
+    margin: 0;
+}
+
+/* Tulisan made by */
+.made {
+    margin-top: 24px;
+    font-size: 13px;
+    font-weight: 1000;
+    color: #37677f;
+}
+
+/* Bintang kecil */
+.spark {
+    position: absolute;
+    font-size: 19px;
+    animation: blink 1.3s infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        opacity: .25;
+        transform: scale(.7);
+    }
+}
+
+/* Pita yang jatuh */
+.float {
+    position: fixed;
+    top: -45px;
+    font-size: 25px;
+    z-index: 10;
+    pointer-events: none;
+
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* GAME KUCING */
+.cat-game{
+    margin:18px auto 8px;
+    padding:16px;
+    background:#eefaff;
+    border:3px dashed #438eb4;
+    border-radius:24px;
+    min-height:220px;
+    overflow:hidden;
+}
+.cat-score{
+    font-size:15px;
+    font-weight:1000;
+    color:#287ea8;
+    margin-bottom:4px;
+}
+.cat-hint{
+    font-size:13px;
+    font-weight:900;
+    color:#4b7890;
+    margin-bottom:8px;
+}
+.cat-area{
+    position:relative;
+    height:135px;
+}
+.cat{
+    position:absolute;
+    top:-90px;
+    transform:translateX(-50%);
+    font-size:68px;
+    cursor:pointer;
+    user-select:none;
+    filter:drop-shadow(3px 4px 0 #8fcbe6);
+    animation:catDrop .65s cubic-bezier(.2,1.5,.4,1) forwards;
+}
+@keyframes catDrop{
+    from{top:-90px;transform:translateX(-50%) rotate(-10deg)}
+    to{top:30px;transform:translateX(-50%) rotate(4deg)}
+}
+.cat.jump{
+    animation:catJump .3s ease;
+}
+@keyframes catJump{
+    50%{transform:translateX(-50%) translateY(-22px) rotate(-8deg) scale(1.08)}
+}
+.cat-done{
+    font-size:18px;
+    font-weight:1000;
+    color:#1e719a;
+    margin:14px 0;
+    animation:appear .5s ease both;
+}
+
+
+/* KEYPAD KODE */
+.keypad{
+    width:min(290px,92%);
+    margin:8px auto 12px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+}
+.key{
+    padding:12px 8px;
+    font-size:18px;
+    border:3px solid #173b52;
+    border-radius:14px;
+    background:#dff5ff;
+    color:#173b52;
+    font-weight:1000;
+    box-shadow:4px 4px 0 #173b52;
+}
+.key:active{
+    transform:translate(3px,3px);
+    box-shadow:1px 1px 0 #173b52;
+}
+.key.clear{
+    background:#b9e6f8;
+}
+
+/* WIDGET REPLAYER & AUDIO CONTROLS */
+.audio-controls {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!--
+-->
+<audio id="bgMusic" autoplay loop preload="auto" playsinline>
+  <source src="musik.mp3" type="audio/mpeg">
+  Browser Anda tidak mendukung elemen audio.
+</audio>
+
+
+<!-- ================================= -->
+<!-- HALAMAN 1 : PEMBUKA -->
+<!-- ================================= -->
+
+<section class="screen" id="home">
+
+    <div class="card">
+
+        <span
+            class="spark"
+            style="top:30px;left:14%">
+            ✦
+        </span>
+
+        <span
+            class="spark"
+            style="top:55px;right:14%">
+            ✧
+        </span>
+
+
+        <div class="ribbon">
+            ada sesuatu buka aja 🎀
+        </div>
+
+
+        <div class="bow">
+            🎀
+        </div>
+
+
+        <h1>
+            BUAT<br>
+            RAIRAI
+        </h1>
+
+
+        <div class="teaser">
+            ada sesuatu nih 😽
+        </div>
+
+        <div class="cat-game" id="catGame">
+            <div class="cat-score" id="catScore">KUCING: 0 / 10 🐱</div>
+            <div class="cat-hint">klik kucingnya sampai 10 kali 😼</div>
+            <div class="cat-area" id="catArea"></div>
+        </div>
+
+        <div id="catDone" class="cat-done hidden">
+            yey udah sampai sini 😽🎀
+        </div>
+
+        <button id="continueBtn" class="hidden" onclick="goCode()">
+            KLIK BUAT LANJUTIN 😽
+        </button>
+
+
+        <div class="made">
+            made by EL😼
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- HALAMAN 2 : KODE -->
+<!-- ================================= -->
+
+<section
+    class="screen hidden"
+    id="codePage">
+
+    <div class="card fade">
+
+        <div class="bow">
+            🎀
+        </div>
+
+
+        <h1>
+            masukan code
+        </h1>
+
+
+        <div class="teaser">
+            wih, udah sampai sini 😼
+        </div>
+
+
+        <div class="hint">
+            kodenya tgl sama bulan ultah aku<br>
+            kalo gtw parah sih 😭
+        </div>
+
+
+        <input type="password" id="code"
+            inputmode="numeric"
+            maxlength="4"
+            placeholder="DDMM"
+            autocomplete="off"
+            oninput="checkCode()"
+        >
+
+        <div class="keypad">
+            <button class="key" onclick="pressKey('1')">1</button>
+            <button class="key" onclick="pressKey('2')">2</button>
+            <button class="key" onclick="pressKey('3')">3</button>
+            <button class="key" onclick="pressKey('4')">4</button>
+            <button class="key" onclick="pressKey('5')">5</button>
+            <button class="key" onclick="pressKey('6')">6</button>
+            <button class="key" onclick="pressKey('7')">7</button>
+            <button class="key" onclick="pressKey('8')">8</button>
+            <button class="key" onclick="pressKey('9')">9</button>
+            <button class="key clear" onclick="clearCode()">⌫</button>
+            <button class="key" onclick="pressKey('0')">0</button>
+            <button class="key clear" onclick="clearAllCode()">C</button>
+        </div>
+
+        <div
+            class="error"
+            id="error">
+        </div>
+
+
+        <div class="made">
+            made by EL😼
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- HALAMAN 3 : SEBELUM UCAPAN -->
+<!-- ================================= -->
+
+<section
+    class="screen hidden"
+    id="beforeMessage">
+
+    <div class="card fade">
+
+        <div class="bow">
+            🎀
+        </div>
+
+
+        <div class="bigtext">
+            wih inget ternyata 😽
+        </div>
+
+
+        <div class="teaser">
+            tapi masih ada satu lagi 😼
+        </div>
+
+
+        <button onclick="showMessage()">
+            💌 ini ucapan dari hati wkwk<br>di baca ya
+        </button>
+
+
+        <div class="made">
+            made by EL😼
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- HALAMAN 4 : UCAPAN -->
+<!-- ================================= -->
+
+<section
+    class="screen hidden"
+    id="message">
+
+    <div class="card fade">
+
+        <div class="bow">
+            🎀
+        </div>
+
+
+        <div class="note">
+
+            <div class="title">
+                HAPPY BIRTHDAY RAI 🎀
+            </div>
+
+
+            <p>
+                Jujur bingung mau ngucapin apa
+                tapi setiap tahun pasti sama,
+                semoga panjang umur dan sehat selalu,
+                gitulah pokoknya.
+                <br><br>
+                Semangat trus yaa,
+                inget Jiko Cioline
+                semangat ku full teruss.
+                <br><br>
+                Gitulah pokonya bingung bilang apa lagi 😭💙
+            </p>
+
+        </div>
+
+
+        <div class="made">
+            made by EL😼
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<script>
+/* =================================
+   PENGATURAN MUSIK BACKSOUND
+================================= */
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.volume = 0.85;
+bgMusic.preload = "auto";
+
+// Putar sedini mungkin saat halaman dibuka.
+// Jika browser memblokir autoplay, klik/tap pertama akan langsung memulainya.
+function playAudio() {
+    if (bgMusic.paused) {
+        const p = bgMusic.play();
+        if (p) p.catch(() => {});
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    bgMusic.load();
+    playAudio();
+});
+
+window.addEventListener("load", playAudio, { once: true });
+
+// Fallback untuk browser HP yang memblokir autoplay.
+document.addEventListener("pointerdown", playAudio, { once: true });
+
+
+/* =================================
+   GAME KUCING
+================================= */
+
+let catScore = 0;
+
+function spawnCat() {
+    const area = document.getElementById("catArea");
+    if (!area) return;
+
+    const cat = document.createElement("div");
+    cat.className = "cat";
+    cat.textContent = "🐱";
+    cat.setAttribute("aria-label", "Klik kucing");
+
+    cat.style.left = (18 + Math.random() * 64) + "%";
+
+    cat.addEventListener("click", function () {
+        playAudio(); // Memastikan musik terputar saat klik kucing
+        catScore++;
+
+        document.getElementById("catScore").textContent =
+            "KUCING: " + catScore + " / 10 🐱";
+
+        cat.classList.remove("jump");
+        void cat.offsetWidth;
+        cat.classList.add("jump");
+
+        setTimeout(function () {
+            cat.remove();
+
+            if (catScore < 10) {
+                spawnCat();
+            } else {
+                document.getElementById("catGame").classList.add("hidden");
+                document.getElementById("catDone").classList.remove("hidden");
+                document.getElementById("continueBtn").classList.remove("hidden");
+            }
+        }, 260);
+    });
+
+    area.appendChild(cat);
+}
+
+spawnCat();
+
+
+/* =================================
+   PINDAH KE HALAMAN KODE
+================================= */
+
+function goCode() {
+    playAudio();
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("codePage").classList.remove("hidden");
+    window.scrollTo(0,0);
+}
+
+
+
+/* =================================
+   CEK KODE
+================================= */
+
+function pressKey(number) {
+    playAudio();
+    const input = document.getElementById("code");
+
+    if (input.value.length < 4) {
+        input.value += number;
+        checkCode();
+    }
+}
+
+function clearCode() {
+    const input = document.getElementById("code");
+    input.value = input.value.slice(0, -1);
+    document.getElementById("error").textContent = "";
+}
+
+function clearAllCode() {
+    const input = document.getElementById("code");
+    input.value = "";
+    document.getElementById("error").textContent = "";
+}
+
+function checkCode() {
+
+    const input = document.getElementById("code").value.trim();
+    const error = document.getElementById("error");
+
+    if (input.length < 4) {
+        error.textContent = "";
+        return;
+    }
+
+    /* KODE RAHASIA */
+    if (input === "0503") {
+        document.getElementById("codePage").classList.add("hidden");
+        document.getElementById("beforeMessage").classList.remove("hidden");
+        window.scrollTo(0,0);
+    } else {
+        error.textContent = "salah 😭 coba inget lagi";
+        document.getElementById("code").value = "";
+    }
+}
+
+
+/* =================================
+   ENTER JUGA BISA UNTUK SUBMIT
+================================= */
+
+document.getElementById("code").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        checkCode();
+    }
+});
+
+
+
+/* =================================
+   BUKA UCAPAN
+================================= */
+
+function showMessage() {
+    playAudio();
+    document.getElementById("beforeMessage").classList.add("hidden");
+    document.getElementById("message").classList.remove("hidden");
+    window.scrollTo(0,0);
+    startRibbons();
+}
+
+
+
+/* =================================
+   PITA JATUH
+================================= */
+
+function startRibbons() {
+
+    setInterval(function() {
+
+        const e = document.createElement("div");
+        e.className = "float";
+        e.textContent = "🎀🐱";
+        e.style.left = Math.random() * 100 + "vw";
+        e.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+        document.body.appendChild(e);
+
+        setTimeout(function() {
+            e.remove();
+        }, 9000);
+
+    }, 500);
+
+}
+
+</script>
+
+</body>
+</html>
